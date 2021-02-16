@@ -1,10 +1,10 @@
 import { Grid } from "@material-ui/core";
 import ProductCard from "../components/Card";
 
-export function categoryFilter(products) {
-  products
+export function categoryFilter(data, categoryType) {
+  data
     .filter((product) => {
-      if (product.category === "bordslampa") {
+      if (product.category === categoryType) {
         return (
           <Grid item key={product.title}>
             <ProductCard

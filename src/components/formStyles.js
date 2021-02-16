@@ -37,6 +37,11 @@ export const useStyles = makeStyles((theme) => ({
       bottom: "20vh",
       left: "46vw",
     },
+    [theme.breakpoints.up("lg")]: {
+      position: "absolute",
+      bottom: "10vh",
+      left: "46vw",
+    },
   },
   linkInButton: {
     color: blueGrey[800],

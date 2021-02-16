@@ -5,13 +5,14 @@ import {
   AppBar,
   Container,
   Grid,
+  Link,
   makeStyles,
   Tab,
   Tabs,
   Typography,
 } from "@material-ui/core";
 import ProductCard from "../components/Card";
-import { categoryFilter } from "../functions/categoryFilter";
+//import { categoryFilter } from "../functions/functions";
 
 const TabPanel = (props) => {
   const { children, value, index, ...other } = props;
@@ -55,6 +56,17 @@ const useStyles = makeStyles((theme) => ({
     width: "100%",
     //backgroundColor: theme.palette.background.paper,
   },
+  categories: {
+    backgroundColor: "#fff",
+    boxShadow: "0 0 0 0",
+    borderBottom: "1px solid #e0e0e0",
+    borderTop: "1px solid #e0e0e0",
+    marginBottom: "2em",
+  },
+  headline: {
+    margin: "0.3em 0 0 0.5em",
+    fontFamily: "Caveat, cursive",
+  },
   label: {
     textTransform: "none",
     color: "#616161",
@@ -71,16 +83,8 @@ const useStyles = makeStyles((theme) => ({
       fontWeight: 600,
     },
   },
-  categories: {
-    backgroundColor: "#fff",
-    boxShadow: "0 0 0 0",
-    borderBottom: "1px solid #e0e0e0",
-    borderTop: "1px solid #e0e0e0",
-    marginBottom: "2em",
-  },
-  headline: {
-    margin: "0.3em 0 0 0.5em",
-    fontFamily: "Caveat, cursive",
+  link: {
+    margin: "2em 1em",
   },
 }));
 
@@ -136,7 +140,13 @@ export default function Home(props) {
                 </Typography>
               </Grid>
               <Grid item key="headline-with-buttons">
-                Register
+                <Link href="/register" className={classes.link}>
+                  Register
+                </Link>
+                <Link href="/login" className={classes.link}>
+                  Login
+                </Link>
+                <Link className={classes.link}>Logout</Link>
               </Grid>
             </Grid>
             {/*----------------------------------categories----------------------------------------------- */}

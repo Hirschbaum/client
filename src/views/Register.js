@@ -59,8 +59,7 @@ const Register = () => {
                 size="large"
                 textcolor="secondary"
                 variant="contained"
-                href="#"
-                /*component={Link} */
+                href="/login"
               >
                 Logga in
               </Button>
@@ -179,7 +178,7 @@ const Register = () => {
         {/*</Paper>*/}
       </Grid>
       <Box>
-        <Link href="#" className={classes.link} underline="hover">
+        <Link href="/home" className={classes.link} underline="hover">
           Tillbaka till butiken
         </Link>
       </Box>

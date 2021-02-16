@@ -71,7 +71,7 @@ export default function ProductCard(props) {
           {props.title}
         </Typography>
         <Typography variant="body1" className={classes.productPrice}>
-          {props.price}
+          {props.price},- kr
         </Typography>
       </CardContent>
     </Card>

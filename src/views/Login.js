@@ -125,17 +125,16 @@ const Login = () => {
               size="large"
               textcolor="secondary"
               variant="contained"
-              href="#"
+              href="/register"
             >
               Registrera dig
             </Button>
           </Grid>
         </Grid>
 
-        <Link href="#" className={classes.link} underline="hover">
+        <Link href="/home" className={classes.link} underline="hover">
           Tillbaka till butiken
         </Link>
-        {/*onClick={(e) => hereFunction(e)} */}
       </Grid>
     </Grid>
   );
