@@ -1,6 +1,6 @@
 import { Divider, Grid, Typography } from "@material-ui/core";
 
-const Products = () => {
+const Product = () => {
   return (
     <Grid container justify="center" spacing={3}>
       {/*---------------------Header with the logo and register/login/logout ------------------------*/}
@@ -15,10 +15,10 @@ const Products = () => {
       </Grid>
       {/*----------------------------------categories----------------------------------------------- */}
       <Grid item container></Grid>
-      {/*-----------------------------------products------------------------------------------------ */}
+      {/*-----------------------------------product------------------------------------------------ */}
       <Grid item container></Grid>
     </Grid>
   );
 };
 
-export default Products;
+export default Product;

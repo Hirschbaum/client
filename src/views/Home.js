@@ -11,7 +11,7 @@ import {
   Typography,
 } from "@material-ui/core";
 import ProductCard from "../components/Card";
-//import { categoryFilter } from "../functions/categoryFilter";
+import { categoryFilter } from "../functions/categoryFilter";
 
 const TabPanel = (props) => {
   const { children, value, index, ...other } = props;
@@ -205,17 +205,164 @@ export default function Home(props) {
             })}
           </TabPanel>
 
+          {/* -----------------------------------bordslampa------------------------------------------------ */}
+
           <TabPanel value={value} index={1} key="002">
-            Bordslampor
+            {products
+              .filter((product) => {
+                if (product.category === "bordslampa") {
+                  return (
+                    <Grid item key={product.title}>
+                      <ProductCard
+                        key={product._id}
+                        id={product.id}
+                        brand={product.brand}
+                        title={product.title}
+                        url={product.url}
+                        producttitle={product.title}
+                        price={product.price}
+                      />
+                    </Grid>
+                  );
+                } else {
+                  return null;
+                }
+              })
+              .map((product) => {
+                return (
+                  <Grid item key={product.title}>
+                    <ProductCard
+                      key={product._id}
+                      id={product.id}
+                      brand={product.brand}
+                      title={product.title}
+                      url={product.url}
+                      producttitle={product.title}
+                      price={product.price}
+                    />
+                  </Grid>
+                );
+              })}
           </TabPanel>
+
+          {/* -----------------------------------golvlampa------------------------------------------------ */}
+
           <TabPanel value={value} index={2} key="003">
-            Golvlampor
+            {products
+              .filter((product) => {
+                if (product.category === "golvlampa") {
+                  return (
+                    <Grid item key={product.title}>
+                      <ProductCard
+                        key={product._id}
+                        id={product.id}
+                        brand={product.brand}
+                        title={product.title}
+                        url={product.url}
+                        producttitle={product.title}
+                        price={product.price}
+                      />
+                    </Grid>
+                  );
+                } else {
+                  return null;
+                }
+              })
+              .map((product) => {
+                return (
+                  <Grid item key={product.title}>
+                    <ProductCard
+                      key={product._id}
+                      id={product.id}
+                      brand={product.brand}
+                      title={product.title}
+                      url={product.url}
+                      producttitle={product.title}
+                      price={product.price}
+                    />
+                  </Grid>
+                );
+              })}
           </TabPanel>
+
+          {/* -----------------------------------taklampa------------------------------------------------ */}
+
           <TabPanel value={value} index={3} key="004">
-            Taklampor
+            {products
+              .filter((product) => {
+                if (product.category === "taklampa") {
+                  return (
+                    <Grid item key={product.title}>
+                      <ProductCard
+                        key={product._id}
+                        id={product.id}
+                        brand={product.brand}
+                        title={product.title}
+                        url={product.url}
+                        producttitle={product.title}
+                        price={product.price}
+                      />
+                    </Grid>
+                  );
+                } else {
+                  return null;
+                }
+              })
+              .map((product) => {
+                return (
+                  <Grid item key={product.title}>
+                    <ProductCard
+                      key={product._id}
+                      id={product.id}
+                      brand={product.brand}
+                      title={product.title}
+                      url={product.url}
+                      producttitle={product.title}
+                      price={product.price}
+                    />
+                  </Grid>
+                );
+              })}
           </TabPanel>
+
+          {/* -----------------------------------vägglampa------------------------------------------------ */}
+
           <TabPanel value={value} index={4} key="005">
-            Vägglampor
+            {products
+              .filter((product) => {
+                if (product.category === "vägglampa") {
+                  return (
+                    <Grid item key={product.title}>
+                      <ProductCard
+                        key={product._id}
+                        id={product.id}
+                        brand={product.brand}
+                        title={product.title}
+                        url={product.url}
+                        producttitle={product.title}
+                        price={product.price}
+                      />
+                    </Grid>
+                  );
+                } else {
+                  return null;
+                }
+              })
+              .map((product) => {
+                return (
+                  <Grid item key={product.title}>
+                    <ProductCard
+                      key={product._id}
+                      id={product.id}
+                      brand={product.brand}
+                      title={product.title}
+                      url={product.url}
+                      producttitle={product.title}
+                      price={product.price}
+                    />
+                  </Grid>
+                );
+              })}
           </TabPanel>
         </Container>
       )}

@@ -57,6 +57,8 @@ const Login = () => {
                 label="e-postadress"
                 placeholder="Skriv in din e-postadress"
                 required
+                type="email"
+                value={values.email}
               />
             </FormControl>
           </Grid>

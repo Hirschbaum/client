@@ -85,9 +85,11 @@ const Register = () => {
               <Input
                 id="standard-adornment-name"
                 label="e-postadress"
+                value={values.name}
                 onChange={handleForm("name")}
                 placeholder="Skriv in ditt namn"
                 required
+                type="text"
               />
             </FormControl>
           </Grid>
@@ -100,9 +102,11 @@ const Register = () => {
               <Input
                 id="standard-adornment-email"
                 label="e-postadress"
+                value={values.email}
                 onChange={handleForm("email")}
                 placeholder="Skriv in din e-postadress"
                 required
+                type="email"
               />
             </FormControl>
           </Grid>
