@@ -5,6 +5,8 @@ export function categoryFilter(data, categoryType) {
   data
     .filter((product) => {
       if (product.category === categoryType) {
+        console.log("filter in progress");
+        console.log("FILTER", product);
         return (
           <Grid item key={product.title}>
             <ProductCard
@@ -23,6 +25,8 @@ export function categoryFilter(data, categoryType) {
       }
     })
     .map((product) => {
+      console.log("map in progress");
+      console.log("MAP", product);
       return (
         <Grid item key={product.title}>
           <ProductCard

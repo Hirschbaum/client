@@ -20,7 +20,7 @@ export const useStyles = makeStyles((theme) => ({
   distance: {
     marginBottom: theme.spacing(2),
   },
-  link: {
+  /*link: {
     fontSize: "1.1em",
     [theme.breakpoints.down("sm")]: {
       position: "absolute",
@@ -42,7 +42,7 @@ export const useStyles = makeStyles((theme) => ({
       bottom: "10vh",
       left: "46vw",
     },
-  },
+  },*/
   linkInButton: {
     color: blueGrey[800],
 
@@ -92,6 +92,7 @@ export const useStyles = makeStyles((theme) => ({
   heading: {
     margin: "1.2em auto",
     fontWeight: 700,
+    textAlign: "center",
   },
   secondaryButton: {
     border: "2px solid",
@@ -99,8 +100,8 @@ export const useStyles = makeStyles((theme) => ({
     fontSize: "1.1em",
     fontWeight: 600,
     textTransform: "none",
-    marginTop: theme.spacing(2),
-    marginBottom: theme.spacing(2),
+    marginTop: theme.spacing(1),
+    marginBottom: theme.spacing(3),
     color: blueGrey[800],
     backgroundColor: "#fff",
     "&:hover": {
