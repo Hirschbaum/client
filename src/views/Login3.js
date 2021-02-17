@@ -14,13 +14,13 @@ import { useStyles } from "../components/formStyles";
 
 const validationSchema = yup.object({
   email: yup
-    .string("Enter your email")
-    .email("Enter a valid email")
-    .required("Email is required"),
+    .string("Ange din e-postadress")
+    .email("Ange en giltig e-postadress")
+    .required("Detta är ett obligatoriskt fält"),
   password: yup
-    .string("Enter your password")
-    .min(8, "Password should be of minimum 8 characters length")
-    .required("Password is required"),
+    .string("Ange ditt lösenord")
+    .min(8, "Ange minst 8 tecken, utan mellanslag")
+    .required("Detta är ett obligatoriskt fält"),
 });
 
 const Login3 = () => {
@@ -32,6 +32,7 @@ const Login3 = () => {
     validationSchema: validationSchema,
     onSubmit: (values) => {
       alert(JSON.stringify(values, null, 2));
+      //here logic for login to db
     },
   });
 
