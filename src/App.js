@@ -7,7 +7,6 @@ import {
 } from "@material-ui/core/styles";
 import Login3 from "./views/Login3";
 import Register3 from "./views/Register3";
-//import Product from "./views/Product";
 import Home from "./views/Home";
 
 function App() {

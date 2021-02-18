@@ -10,6 +10,7 @@ import {
   Typography,
 } from "@material-ui/core";
 import { useStyles } from "../components/formStyles";
+import axios from "axios";
 
 const validationSchema = yup.object({
   email: yup
@@ -28,7 +29,7 @@ const validationSchema = yup.object({
     .matches(/^\S*$/, "Ange minst 8 tecken, utan mellanslag"),
   passwordConfirm: yup
     .string("Bekräfta ditt lösenord")
-    .oneOf([yup.ref("password"), null], "Passwords must match"),
+    .oneOf([yup.ref("password"), null], "Lösenorden stämmer inte överens"),
 });
 
 const Register3 = () => {
@@ -40,19 +41,36 @@ const Register3 = () => {
       passwordConfirm: "",
     },
     validationSchema: validationSchema,
-    onSubmit: (values) => {
+    onSubmit: (values, e) => {
       console.log("ON SUBMIT", formik.values);
-      alert(JSON.stringify(values, null, 2));
-      //here logic for registering, for handleSubmit
+      handleRegister(e);
     },
   });
+
+  const handleRegister = (e) => {
+    e.preventDefault();
+    axios
+      .post("/api/users/register", {
+        name: formik.values.name,
+        email: formik.values.email,
+        password: formik.values.password,
+      })
+      .then((res) => {
+        console.log("GOT RESPONSE REGISTERING NEW USER", res);
+        //send the user to "/login"
+      })
+      .catch((err) => {
+        console.log("Error by registering new user", err);
+        //if time left: showErrorMsg
+      });
+  };
 
   const classes = useStyles();
 
   return (
     <Grid container spacing={3} justify="center" className={classes.container}>
       <Grid item xs={12} sm={6} md={6} lg={3} xl={3}>
-        <form onSubmit={formik.handleSubmit}>
+        <form onSubmit={(e) => handleRegister(e)}>
           <Grid container justify="center">
             {/*---------------------------- REGISTER HEADLINE -------------------------------------- */}
             {/*--------- LINK TO LOGIN ------------------------------------------------------------- */}
