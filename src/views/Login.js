@@ -1,149 +1,150 @@
-import { useState } from "react";
+import { useFormik } from "formik";
+import * as yup from "yup";
 import {
   Box,
   Button,
   Divider,
-  FormControl,
   Grid,
-  IconButton,
-  Input,
-  InputAdornment,
-  InputLabel,
   Link,
+  TextField,
   Typography,
 } from "@material-ui/core";
 import LoginAvatar from "../components/LoginAvatar";
-import { Visibility, VisibilityOff } from "@material-ui/icons";
 import { useStyles } from "../components/formStyles";
+import axios from "axios";
 
-const Login = () => {
-  const [values, setValues] = useState({
-    password: "",
-    email: "",
-    showPassword: false,
+const validationSchema = yup.object({
+  email: yup
+    .string("Ange din e-postadress")
+    .email("Ange en giltig e-postadress")
+    .required("Detta är ett obligatoriskt fält"),
+  password: yup
+    .string("Ange ditt lösenord")
+    .min(8, "Ange minst 8 tecken, utan mellanslag")
+    .required("Detta är ett obligatoriskt fält"),
+});
+
+const Login3 = () => {
+  const formik = useFormik({
+    initialValues: {
+      email: "",
+      password: "",
+    },
+    validationSchema: validationSchema,
+    onSubmit: (values) => {
+      console.log("Login values", formik.values);
+      handleSubmit();
+    },
   });
 
-  const handlePassword = (prop) => (event) => {
-    setValues({ ...values, [prop]: event.target.value });
-  };
-
-  const handleClickShowPassword = () => {
-    setValues({ ...values, showPassword: !values.showPassword });
-  };
-
-  const handleMouseDownPassword = (event) => {
-    event.preventDefault();
+  const handleSubmit = () => {
+    axios
+      .post("/api/users/login", {
+        email: formik.values.email,
+        password: formik.values.password,
+      })
+      .then((res) => {
+        console.log("LOGIN SUCCESS", res);
+        alert("Du är nu inloggat.");
+        //if time left: modal for this message
+      })
+      .catch((err) => {
+        console.log("LOGIN FAILED", err);
+        alert("Något gick fel. E-post eller lösenord stämmer inte.");
+        //if time left: modal for this message
+      });
   };
 
   const classes = useStyles();
 
   return (
     <Grid container spacing={3} justify="center" className={classes.container}>
-      <Grid item xs={12} sm={6} md={5} lg={3} xl={3}>
-        <form>
+      <Grid item xs={12} sm={6} md={6} lg={3} xl={3}>
+        <form onSubmit={formik.handleSubmit}>
           <Grid container justify="center">
+            {/*---------------------------- LOGIN HEADLINE -------------------------------------- */}
             <Box align="center" className={classes.distance}>
               <LoginAvatar />
               <Typography variant="h5">Välkommen tillbaka</Typography>
             </Box>
-
+            {/*-------------------------------- EMAIL INPUT -------------------------------------- */}
             <Grid item xs={10} sm={10} md={8} lg={12} xl={12}>
-              <FormControl fullWidth className={classes.distance}>
-                <InputLabel htmlFor="standard-adornment-email">
-                  E-postadress
-                </InputLabel>
-                <Input
-                  id="standard-adornment-email"
-                  label="e-postadress"
-                  placeholder="Skriv in din e-postadress"
-                  required
-                  type="email"
-                  value={values.email}
-                />
-              </FormControl>
+              <TextField
+                className={classes.distance}
+                fullWidth
+                id="email"
+                name="email"
+                label="Email"
+                value={formik.values.email}
+                onChange={formik.handleChange}
+                error={formik.touched.email && Boolean(formik.errors.email)}
+                helperText={formik.touched.email && formik.errors.email}
+              />
             </Grid>
-
+            {/*-------------------------------- PASSWORD INPUT -------------------------------------- */}
             <Grid item xs={10} sm={10} md={8} lg={12} xl={12}>
-              <FormControl fullWidth className={classes.distance}>
-                <InputLabel htmlFor="standard-adornment-password">
-                  Lösenord
-                </InputLabel>
-                <Input
-                  id="standard-adornment-password"
-                  onChange={handlePassword("password")}
-                  placeholder="Skriv in ditt lösenord"
-                  type={values.showPassword ? "text" : "password"}
-                  value={values.password}
-                  endAdornment={
-                    <InputAdornment position="end">
-                      <IconButton
-                        aria-label="toggle password visibility"
-                        onClick={handleClickShowPassword}
-                        onMouseDown={handleMouseDownPassword}
-                      >
-                        {values.showPassword ? (
-                          <Visibility />
-                        ) : (
-                          <VisibilityOff />
-                        )}
-                      </IconButton>
-                    </InputAdornment>
-                  }
-                />
-              </FormControl>
+              <TextField
+                className={classes.distance}
+                fullWidth
+                id="password"
+                name="password"
+                label="Password"
+                type="password"
+                value={formik.values.password}
+                onChange={formik.handleChange}
+                error={
+                  formik.touched.password && Boolean(formik.errors.password)
+                }
+                helperText={formik.touched.password && formik.errors.password}
+              />
             </Grid>
-
-            <Grid container justify="center">
-              <Grid item xs={10} sm={10} md={8} lg={12} xl={12}>
-                <Button
-                  className={classes.focusButton}
-                  color="primary"
-                  fullWidth
-                  size="large"
-                  textcolor="secondary"
-                  type="submit"
-                  variant="contained"
-                >
-                  Logga In
-                </Button>
-              </Grid>
-              <Grid item xs={10} sm={10} md={8} lg={12} xl={12}>
-                <Divider
-                  variant="fullWidth"
-                  className={classes.marginDivider}
-                />
-              </Grid>
-            </Grid>
-          </Grid>
-
-          {/*----------------------------link to register----------------------------*/}
-
-          <Grid
-            container
-            justify="center"
-            alignItems="center"
-            alignContent="center"
-          >
-            <Grid container>
-              <Typography variant="overline" className={classes.heading}>
-                Jag är ny här
-              </Typography>
-            </Grid>
+            {/*-------------------------------- LOGIN BUTTON -------------------------------------- */}
             <Grid item xs={10} sm={10} md={8} lg={12} xl={12}>
               <Button
-                className={classes.secondaryButton}
+                className={classes.focusButton}
                 color="primary"
                 fullWidth
                 size="large"
                 textcolor="secondary"
+                type="submit"
                 variant="contained"
-                href="/register"
               >
-                Registrera dig
+                Submit
               </Button>
+            </Grid>
+            {/*-------------------------------- DIVIDER <HR/> -------------------------------------- */}
+            <Grid item xs={10} sm={10} md={8} lg={12} xl={12}>
+              <Divider variant="fullWidth" className={classes.marginDivider} />
+            </Grid>
+            {/*------------------------------ LINK TO REGISTER ------------------------------------ */}
+            <Grid
+              container
+              justify="center"
+              alignItems="center"
+              alignContent="center"
+            >
+              <Grid container>
+                <Typography variant="overline" className={classes.heading}>
+                  Jag är ny här
+                </Typography>
+              </Grid>
+              <Grid item xs={10} sm={10} md={8} lg={12} xl={12}>
+                <Button
+                  className={classes.secondaryButton}
+                  color="primary"
+                  fullWidth
+                  size="large"
+                  textcolor="secondary"
+                  variant="contained"
+                  href="/register"
+                >
+                  Registrera dig
+                </Button>
+              </Grid>
             </Grid>
           </Grid>
         </form>
+        {/*---------------------------- LINK BACK TO THE SHOP ---------------------------------- */}
         <Grid container justify="center">
           <Link href="/home" className={classes.link} underline="hover">
             Tillbaka till butiken
@@ -154,4 +155,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default Login3;

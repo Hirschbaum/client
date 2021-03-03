@@ -5,8 +5,8 @@ import {
   responsiveFontSizes,
   ThemeProvider,
 } from "@material-ui/core/styles";
-import Login3 from "./views/Login3";
-import Register3 from "./views/Register3";
+import Login from "./views/Login";
+import Register from "./views/Register";
 import Home from "./views/Home";
 
 function App() {
@@ -18,8 +18,8 @@ function App() {
       <div className="App">
         <Router>
           <Route exact path="/home" component={Home}></Route>
-          <Route path="/register" component={Register3}></Route>
-          <Route path="/login" component={Login3}></Route>
+          <Route path="/register" component={Register}></Route>
+          <Route path="/login" component={Login}></Route>
         </Router>
       </div>
     </ThemeProvider>

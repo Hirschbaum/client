@@ -12,6 +12,7 @@ import {
   Typography,
 } from "@material-ui/core";
 import ProductCard from "../components/Card";
+import { PermIdentity } from "@material-ui/icons";
 //import { categoryFilter } from "../functions/functions";
 
 const TabPanel = (props) => {
@@ -85,6 +86,10 @@ const useStyles = makeStyles((theme) => ({
   },
   link: {
     margin: "2em 1em",
+    color: "#000",
+  },
+  headlineIcon: {
+    marginTop: "1em",
   },
 }));
 
@@ -138,11 +143,8 @@ export default function Home(props) {
                 </Typography>
               </Grid>
               <Grid item key="headline-with-buttons">
-                <Link href="/register" className={classes.link}>
-                  Register
-                </Link>
                 <Link href="/login" className={classes.link}>
-                  Login
+                  <PermIdentity className={classes.headlineIcon} />
                 </Link>
                 <Link className={classes.link}>Logout</Link>
               </Grid>
