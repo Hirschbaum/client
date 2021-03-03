@@ -42,7 +42,6 @@ const Register3 = () => {
     },
     validationSchema: validationSchema,
     onSubmit: (values) => {
-      console.log("ON SUBMIT", formik.values);
       handleSubmit();
     },
   });

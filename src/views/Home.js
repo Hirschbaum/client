@@ -12,7 +12,9 @@ import {
   Typography,
 } from "@material-ui/core";
 import ProductCard from "../components/Card";
+import ExitToAppIcon from "@material-ui/icons/ExitToApp";
 import { PermIdentity } from "@material-ui/icons";
+//import { AuthContext } from "../context/AuthContext";
 //import { categoryFilter } from "../functions/functions";
 
 const TabPanel = (props) => {
@@ -98,6 +100,7 @@ export default function Home(props) {
   const [value, setValue] = useState(0);
   const [products, setProducts] = useState(["empty"]);
   const [loading, setLoading] = useState(true);
+  //const { isLoggedIn } = useContext(AuthContext);
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
@@ -144,9 +147,17 @@ export default function Home(props) {
               </Grid>
               <Grid item key="headline-with-buttons">
                 <Link href="/login" className={classes.link}>
-                  <PermIdentity className={classes.headlineIcon} />
+                  <PermIdentity
+                    className={classes.headlineIcon}
+                    fontSize="large"
+                  />
                 </Link>
-                <Link className={classes.link}>Logout</Link>
+                <Link className={classes.link}>
+                  <ExitToAppIcon
+                    className={classes.headlineIcon}
+                    fontSize="large"
+                  />
+                </Link>
               </Grid>
             </Grid>
             {/*----------------------------------categories----------------------------------------------- */}

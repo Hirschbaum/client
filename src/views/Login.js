@@ -24,7 +24,7 @@ const validationSchema = yup.object({
     .required("Detta är ett obligatoriskt fält"),
 });
 
-const Login3 = () => {
+const Login3 = (props) => {
   const formik = useFormik({
     initialValues: {
       email: "",

@@ -11,8 +11,8 @@ import {
   CardActionArea,
 } from "@material-ui/core";
 
-//import { grey } from "@material-ui/core/colors";
 import FavoriteBorderIcon from "@material-ui/icons/FavoriteBorder";
+import { ShoppingCartOutlined } from "@material-ui/icons";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -35,6 +35,15 @@ const useStyles = makeStyles((theme) => ({
     fontSize: "1.1em",
     color: "#b71c1c",
   },
+  cart: {
+    color: "rgba(0, 0, 0, 0.54)",
+    alignSelf: "flex-end",
+  },
+  contentBox: {
+    display: "flex",
+    justifyContent: "space-between",
+    flexWrap: "nowrap",
+  },
 }));
 
 export default function ProductCard(props) {
@@ -44,8 +53,8 @@ export default function ProductCard(props) {
     <Card className={classes.root} key={props._id}>
       <CardHeader
         action={
-          <IconButton aria-label="settings">
-            <FavoriteBorderIcon />
+          <IconButton aria-label="favorite">
+            <FavoriteBorderIcon fontSize="large" />
           </IconButton>
         }
         title={props.brand}
@@ -60,19 +69,23 @@ export default function ProductCard(props) {
         />
       </CardActionArea>
       <CardContent>
-        {/*
+        <div className={classes.contentBox}>
+          {/*
         <Typography variant="body2" color="textSecondary" component="p">
-          Night Owl bordslampa från Fritz Hansen är designad av Nicholai Wiig
-          Hansen utifrån en önskan att skapa en nattlampa med nordisk känsla som
-          sprider ett mysigt och varmt sken.
+          {props.description}
         </Typography>
         */}
-        <Typography variant="body1" className={classes.productName}>
-          {props.title}
-        </Typography>
-        <Typography variant="body1" className={classes.productPrice}>
-          {props.price},- kr
-        </Typography>
+          <div>
+            <Typography variant="body1" className={classes.productName}>
+              {props.title}
+            </Typography>
+            <Typography variant="body1" className={classes.productPrice}>
+              {props.price},- kr
+            </Typography>
+          </div>
+
+          <ShoppingCartOutlined fontSize="large" className={classes.cart} />
+        </div>
       </CardContent>
     </Card>
   );
