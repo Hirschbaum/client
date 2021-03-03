@@ -11,6 +11,7 @@ import {
 } from "@material-ui/core";
 import LoginAvatar from "../components/LoginAvatar";
 import { useStyles } from "../components/formStyles";
+import axios from "axios";
 
 const validationSchema = yup.object({
   email: yup
@@ -31,13 +32,28 @@ const Login3 = () => {
     },
     validationSchema: validationSchema,
     onSubmit: (values) => {
-      alert(JSON.stringify(values, null, 2));
-      //here logic for login to db
+      console.log("Login values", formik.values);
+      handleSubmit();
     },
   });
 
-  //handleChange
-  //handleSubmit
+  const handleSubmit = () => {
+    axios
+      .post("/api/users/login", {
+        email: formik.values.email,
+        password: formik.values.password,
+      })
+      .then((res) => {
+        console.log("LOGIN SUCCESS", res);
+        alert("Du är nu inloggat.");
+        //if time left: modal for this message
+      })
+      .catch((err) => {
+        console.log("LOGIN FAILED", err);
+        alert("Något gick fel. E-post eller lösenord stämmer inte.");
+        //if time left: modal for this message
+      });
+  };
 
   const classes = useStyles();
 

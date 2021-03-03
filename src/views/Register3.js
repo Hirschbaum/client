@@ -29,7 +29,7 @@ const validationSchema = yup.object({
     .matches(/^\S*$/, "Ange minst 8 tecken, utan mellanslag"),
   passwordConfirm: yup
     .string("Bekräfta ditt lösenord")
-    .oneOf([yup.ref("password"), null], "Lösenorden stämmer inte överens"),
+    .oneOf([yup.ref("password"), null], "Passwords must match"),
 });
 
 const Register3 = () => {
@@ -41,14 +41,13 @@ const Register3 = () => {
       passwordConfirm: "",
     },
     validationSchema: validationSchema,
-    onSubmit: (values, e) => {
+    onSubmit: (values) => {
       console.log("ON SUBMIT", formik.values);
-      handleRegister(e);
+      handleSubmit();
     },
   });
 
-  const handleRegister = (e) => {
-    e.preventDefault();
+  const handleSubmit = () => {
     axios
       .post("/api/users/register", {
         name: formik.values.name,
@@ -56,12 +55,14 @@ const Register3 = () => {
         password: formik.values.password,
       })
       .then((res) => {
-        console.log("GOT RESPONSE REGISTERING NEW USER", res);
-        //send the user to "/login"
+        console.log("GOT RESPONSE: REGISTRERING NEW USER", res);
+        alert("registrering lyckades");
+        //forward to login
       })
       .catch((err) => {
-        console.log("Error by registering new user", err);
-        //if time left: showErrorMsg
+        console.log("error by registrering new user", err);
+        alert("något gick fel");
+        //if time left: errorMsg as modal
       });
   };
 
@@ -70,7 +71,7 @@ const Register3 = () => {
   return (
     <Grid container spacing={3} justify="center" className={classes.container}>
       <Grid item xs={12} sm={6} md={6} lg={3} xl={3}>
-        <form onSubmit={(e) => handleRegister(e)}>
+        <form onSubmit={formik.handleSubmit}>
           <Grid container justify="center">
             {/*---------------------------- REGISTER HEADLINE -------------------------------------- */}
             {/*--------- LINK TO LOGIN ------------------------------------------------------------- */}
@@ -168,7 +169,6 @@ const Register3 = () => {
                 variant="contained"
                 fullWidth
                 type="submit"
-                //onSubmit={handleSubmit}
               >
                 Registrera dig
               </Button>
